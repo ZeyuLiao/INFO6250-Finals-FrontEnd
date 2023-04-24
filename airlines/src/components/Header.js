@@ -7,9 +7,7 @@ function Header() {
 
   console.log(sessionStorage.getItem('username'));
 
-  const { loginUsername } = useContext(AppContext);
-
-  const { setLoginUsername } = useContext(AppContext);
+  const { loginUsername, setLoginUsername} = useContext(AppContext);
 
   //loginUsername = sessionStorage.getItem('username');
 

@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from 'yup';
 import {api} from '../axios/api';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
   email: yup.string().email().required(),
-  phone: yup.string().matches(/^\d{10}$/),
+  phone: yup.string().matches(/^\d{10}$/).required(),
   username: yup.string().required(),
   password: yup.string().required().min(6),
 });
 
 function Signup() {
-  const [formData, setFormData] = useState({
+  const [formData] = useState({
     name: '',
     email: '',
     phone: '',
@@ -20,103 +21,78 @@ function Signup() {
     password: '',
   });
 
-  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
-  const handleChange = (event) => {
-    setFormData({
-      ...formData,
-      [event.target.name]: event.target.value,
-    });
-  };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    schema
-      .validate(formData, { abortEarly: false })
-      .then(async () => {
-        // form data is valid
-        console.log('form data is valid:', formData);
-        try {
-            const response = await api.post("/user/signup", formData);
-            console.log(response.data);
-            //setResponse(response.data);
-          } catch (error) {
-            console.log(error);
-          }
-      })
-      .catch((err) => {
-        // form data is invalid
-        const newErrors = {};
-        err.inner.forEach((error) => {
-          newErrors[error.path] = error.message;
-        });
-        setErrors(newErrors);
-      });
+  const handleSubmit = async (values) => {
+    // handle form submission
+    try {
+      const response = await api.post("/user/signup", values);
+      if(response.data === "Duplicate Username"){
+        alert("Username already exists");
+        return;
+      }
+      //setResponse(response.data);
+      navigate('/login');
+    } catch (error) {
+      alert("Email already exists");
+      console.log(error);
+    }
   };
 
   return (
     <div className="modal-body p-5 pt-0 ">
       <div className="modal-header p-5 pb-4 border-bottom-0">
-                <h1 className="text-primary fw-bold mb-0 fs-2">Sign Up</h1>
-                <Link to="/" type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></Link>
-        </div>
+        <h1 className="text-primary fw-bold mb-0 fs-2">Sign Up</h1>
+        <Link
+          to="/"
+          type="button"
+          className="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></Link>
+      </div>
 
-        <div class="modal-body p-5 pt-0">
-        <form onSubmit={handleSubmit} className="row g-3 needs-validation">
-        <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-        />
-        {errors.name && <div>{errors.name}</div>}
+      <div className="modal-body p-5 pt-0">
+        <Formik
+          initialValues={formData}
+          validationSchema={schema}
+          onSubmit={handleSubmit}
+        >
+          {() => (
+            <Form className="g-3 needs-validation">
+              <div className="col-4 form-group">
+                <label htmlFor="name">Name:</label>
+                <Field type="text" name="name" className="form-control" />
+                <ErrorMessage name="name" component="div" className="text-danger" />
+              </div>
+              <div className="col-4 form-group">
+                <label htmlFor="email">Email:</label>
+                <Field type="email" name="email" className="form-control" />
+                <ErrorMessage name="email" component="div" className="text-danger" />
+              </div>
+              <div className="col-4 form-group">
+                <label htmlFor="phone">Phone:</label>
+                <Field type="tel" name="phone" className="form-control" />
+                <ErrorMessage name="phone" component="div" className="text-danger" />
+              </div>
+              <div className="col-4 form-group">
+                <label htmlFor="username">Username:</label>
+                <Field type="text" name="username" className="form-control" />
+                <ErrorMessage name="username" component="div" className="text-danger" />
+              </div>
+              <div className="col-4 form-group">
+                <label htmlFor="password">Password:</label>
+                <Field type="password" name="password" className="form-control" />
+                <ErrorMessage name="password" component="div" className="text-danger" />
+              </div>
+              <button type="submit" className="mt-3 btn btn-primary">
+                Submit
+              </button>
+            </Form>
+          )}
+        </Formik>
       </div>
-      <div className="col-6 form-group">
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-        />
-        {errors.email && <div>{errors.email}</div>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="phone">Phone:</label>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-        />
-        {errors.phone && <div>{errors.phone}</div>}
-      </div>
-      <div className="form-group">
-        <label htmlFor="username">Username:</label>
-        <input
-          type="text"
-          name="username"
-          value={formData.username}
-          onChange={handleChange}
-        />
-        {errors.username && <div>{errors.username}</div>}
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={formData.password}
-          onChange={handleChange}
-        />
-        {errors.password && <div>{errors.password}</div>}
-      </div>
-      <button type="submit" className="btn btn-primary">Submit</button>
-        </form>
-
-        </div>
     </div>
   );
 }

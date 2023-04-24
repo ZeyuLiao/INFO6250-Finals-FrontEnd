@@ -22,6 +22,7 @@ const AppContextProvider = (props) => {
     if (storedUsername !== loginUsername) {
       setLoginUsername(storedUsername);
     }
+  // eslint-disable-next-line
   }, []);
 
   const contextValue = {

@@ -8,6 +8,23 @@ const api = axios.create({
   baseURL: 'http://localhost:8081',
 });
 
+const apiAC = axios.create({
+  baseURL: 'http://localhost:8091',
+});
+
+const apiCA = axios.create({
+  baseURL: 'http://localhost:8092',
+});
+
+const apiEK = axios.create({
+  baseURL: 'http://localhost:8093',
+});
+const apiLF = axios.create({
+  baseURL: 'http://localhost:8094',
+});
+const apiDL = axios.create({
+  baseURL: 'http://localhost:8095',
+});
 
 apiWithToken.interceptors.request.use(
   (config) => {
@@ -24,4 +41,4 @@ apiWithToken.interceptors.request.use(
 );
 
 
-export {api, apiWithToken};
+export {api, apiWithToken, apiAC, apiCA,apiEK,apiLF,apiDL};

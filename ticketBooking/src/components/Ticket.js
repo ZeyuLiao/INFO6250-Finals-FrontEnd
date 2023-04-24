@@ -35,7 +35,7 @@ function Ticket() {
       departure_time : flight.departure_time,
       duration : flight.duration,
       price : flight.price,
-      airline : flight.airline,
+      proxy_flight_number : flight.proxy_flight_number,
       status : "confirmed"
     })
       .then(response => {

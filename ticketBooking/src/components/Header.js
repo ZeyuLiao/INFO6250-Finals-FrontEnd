@@ -20,6 +20,10 @@ function Header() {
     setLoginUsername('');
   };
 
+  if(loginUsername === null){
+    setLoginUsername('');
+  }
+
   return (
     <header className="p-1 text-bg-dark sticky-top">
       <div className="container-fluid">

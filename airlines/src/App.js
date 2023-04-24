@@ -2,11 +2,9 @@ import React, {useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AppContextProvider } from './AppContext';
 import Header from './components/Header';
-import Profile from './components/Profile';
-import RedirectPage from './components/Redirect';
-import Ticket from './components/Ticket';
-import OrdersTable from './components/Orders';
 import ACLogin from './AirCanada/ACLogin';
+import ACAdmin from './AirCanada/ACAdmin';
+import ACManagerDashboard from './AirCanada/ACDashboard';
 
 
 function App() {
@@ -17,10 +15,8 @@ function App() {
             <Header />
             <Routes>
               <Route exact path='/AC' element={<ACLogin/>}/>
-              <Route exact path='/profile' element={<Profile/>}/>
-              <Route exact path='/buyTicket' element={<Ticket/>}/>
-              <Route exact path='/redirect' element={<RedirectPage/>}/>
-              <Route exact path='/orders' element={<OrdersTable/>}/>
+              <Route exact path='/ACAdmin' element={<ACAdmin/>}/>
+              <Route exact path='/ACManager' element={<ACManagerDashboard/>}/>
             </Routes>
           </Router>
     </ AppContextProvider >

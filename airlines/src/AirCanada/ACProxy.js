@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Table, ButtonGroup, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { apiAC } from "../axios/api";
+import { timeFormat } from "../utils/utils";
 
-function ACAdmin() {
+function ACProxy() {
   const [flights, setFlights] = useState({});
   const navigate = useNavigate();
 
@@ -24,13 +25,15 @@ function ACAdmin() {
 
   const onAdd = async () => {
     navigate(`AC/add`);
-    };
+  };
+
+
 
   useEffect(() => {
     const getFlights = async () => {
       try {
         const response = await apiAC.get(
-          `/outsideApi/ourFlights`
+          `/outsideApi/theirFlights?proxy_company=AC`
         );
         setFlights(response.data);
       } catch (error) {
@@ -51,24 +54,23 @@ function ACAdmin() {
             <th>Departure Time</th>
             <th>Duration</th>
             <th>Price</th>
-            <th><Button
-                      variant="primary"
-                      onClick={() => onAdd()}
-                    >
-                      Add
-                    </Button></th>
+            <th>Operated By</th>
+            <th>
+              Action
+            </th>
           </tr>
         </thead>
         <tbody>
           {flights.length > 0 ? (
             flights.map((flight) => (
-              <tr key={flight.flightNumber}>
-                <td>{flight.flightNumber}</td>
+              <tr key={flight.flightNumber} className="text-center">
+                <td>{flight.flight_number}</td>
                 <td>{flight.departure}</td>
                 <td>{flight.destination}</td>
-                <td>{flight.departureTime}</td>
+                <td>{timeFormat(flight.departure_time)}</td>
                 <td>{flight.duration}</td>
                 <td>{flight.price}</td>
+                <td>{flight.proxy_flight_number}</td>
                 <td>
                   <ButtonGroup>
                     <Button
@@ -96,4 +98,4 @@ function ACAdmin() {
   );
 }
 
-export default ACAdmin;
+export default ACProxy;
