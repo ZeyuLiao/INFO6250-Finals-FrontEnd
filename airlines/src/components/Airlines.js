@@ -1,28 +1,27 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-const ACLogin = () => {
+const Airlines = () => {
   const navigate = useNavigate();
 
   return (
     <div className="p-5 m-5 rounded shadow">
       <h1>Login</h1>
-
-      <div className="mt-5 container">
-        <div className="col-3 m-3">
+      <div className="mt-5 container row">
+        <div className="col-3">
           <button
-            className=" btn btn-primary"
-            onClick={() => navigate("/ACADmin")}
+            className=" btn btn-primary "
+            onClick={() => navigate("/ACLogin")}
           >
-            Login as Admin
+            Air Canada
           </button>
         </div>
-        <div className="col-3 m-3">
+        <div className="col-3">
           <button
             className=" btn btn-primary"
             onClick={() => navigate("/ACManager")}
           >
-            Login as Manager
+            Air China
           </button>
         </div>
       </div>
@@ -30,4 +29,4 @@ const ACLogin = () => {
   );
 };
 
-export default ACLogin;
+export default Airlines;

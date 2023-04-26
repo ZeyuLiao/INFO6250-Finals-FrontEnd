@@ -1,21 +1,18 @@
-import React, { useContext } from 'react';
-import { AppContext } from '../AppContext';
-import { Link } from 'react-router-dom';
-import logo from '../assets/Neu_Logo.png';
+import React, { useContext } from "react";
+import { AppContext } from "../AppContext";
+import { Link } from "react-router-dom";
+import logo from "../assets/Neu_Logo.png";
 
 function Header() {
+  console.log(sessionStorage.getItem("username"));
 
-  console.log(sessionStorage.getItem('username'));
-
-  const { loginUsername, setLoginUsername} = useContext(AppContext);
+  const { loginUsername, setLoginUsername } = useContext(AppContext);
 
   //loginUsername = sessionStorage.getItem('username');
 
-
-
   const handleChange = (event) => {
-    sessionStorage.removeItem('username');
-    setLoginUsername('');
+    sessionStorage.removeItem("username");
+    setLoginUsername("");
   };
 
   return (
@@ -38,46 +35,20 @@ function Header() {
               </Link>
             </li>
           </ul>
-          {loginUsername!== ''  ? (
-            <div className="d-flex justify-content-center align-items-center">
-              <Link
-                to="/orders"
-                className="btn-link me-2 fs-5"
-                style={{ cursor: 'pointer' }}
-              >
-                Orders                
-              </Link>
-              <Link to="/profile" className="btn-link me-2 fs-5">
-                {loginUsername}
-              </Link>
-              <a href="/" className="nav-link me-2 text-white fs-5" onClick={handleChange}>
-                Logout
-              </a>
-            </div>
-          ) : (
-            <div className="text-end">
-              <Link
-                type="button"
-                to="/login"
-                className="btn btn-outline-light me-2"
-                data-bs-toggle="modal"
-                data-bs-target="#modalLogin"
-                id="loginButton"
-              >
-                Log In
-              </Link>
-              <Link
-                type="button"
-                to="/signup"
-                className="btn btn-info"
-                data-bs-toggle="modal"
-                data-bs-target="#modalSignUp"
-                id="signUpButton"
-              >
-                Sign Up
-              </Link>
-            </div>
-          )}
+
+
+          <div className="text-end">
+            <Link
+              type="button"
+              to="/"
+              className="btn btn-outline-light me-2"
+              data-bs-toggle="modal"
+              data-bs-target="#modalLogin"
+              id="loginButton"
+            >
+              Log Out
+            </Link>
+          </div>
         </div>
       </div>
     </header>

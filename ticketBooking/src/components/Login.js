@@ -1,47 +1,45 @@
-import React, { useState, useContext  } from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../AppContext';
-import {api} from '../axios/api';
+import React, { useState, useContext } from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import { AppContext } from "../AppContext";
+import { api } from "../axios/api";
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string().required('Username is required'),
-  password: Yup.string().required('Password is required'),
+  username: Yup.string().required("Username is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 const initialValues = {
-  username: '',
-  password: '',
+  username: "",
+  password: "",
 };
 
 const LoginForm = () => {
   const [formData] = useState(initialValues);
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // added redirect state
   const navigate = useNavigate();
   const { setLoginUsername } = useContext(AppContext);
 
   const onSubmit = async (formData) => {
     // handle login logic here
-    try {
-      const response = await api.post("/login", formData);
-      sessionStorage.setItem('token', response.data.token);
-      sessionStorage.setItem('username', response.data.username);
-      sessionStorage.setItem('user',response.data);
-      setLoginUsername(response.data.username);
-      setIsAuthenticated(true); // 设置为已认证
-    } catch (error) {
-      <></>
-    }
+
+    await api
+      .post("/login", formData)
+      .then((response) => {
+        window.alert("Login successfully.");
+        sessionStorage.setItem("token", response.data.token);
+        sessionStorage.setItem("username", response.data.username);
+        sessionStorage.setItem("user", response.data);
+        setLoginUsername(response.data.username);
+        navigate(`/`);
+      })
+      .catch((error) => {
+        window.alert("Login failed, Check your username and password.");
+      });
   };
 
-  if (isAuthenticated) {
-    console.log('isAuthenticated: ', isAuthenticated);
-    navigate('/'); // 跳转到首页
-  }
-
   return (
-    <div className='p-5 pt-0'>
+    <div className="p-5 pt-0">
       <h1>Login</h1>
       <Formik
         initialValues={formData}
@@ -49,14 +47,14 @@ const LoginForm = () => {
         onSubmit={onSubmit}
       >
         {({ errors, touched }) => (
-          <Form className='pt-4'>
+          <Form className="pt-4">
             <div className="form-group col-4">
               <label htmlFor="username">Username:</label>
               <Field
                 type="text"
                 name="username"
                 className={`form-control ${
-                  touched.username && errors.username ? 'is-invalid' : ''
+                  touched.username && errors.username ? "is-invalid" : ""
                 }`}
               />
               <ErrorMessage
@@ -71,7 +69,7 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 className={`form-control ${
-                  touched.password && errors.password ? 'is-invalid' : ''
+                  touched.password && errors.password ? "is-invalid" : ""
                 }`}
               />
               <ErrorMessage
@@ -80,12 +78,11 @@ const LoginForm = () => {
                 className="invalid-feedback"
               />
             </div>
-            <div className='pt-3'>
-                <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
+            <div className="pt-3">
+              <button type="submit" className="btn btn-primary">
+                Submit
+              </button>
             </div>
-            
           </Form>
         )}
       </Formik>

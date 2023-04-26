@@ -23,7 +23,6 @@ function Signup() {
 
   const navigate = useNavigate();
 
-
   const handleSubmit = async (values) => {
     // handle form submission
     try {

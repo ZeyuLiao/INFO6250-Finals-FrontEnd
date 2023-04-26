@@ -5,6 +5,9 @@ import Header from './components/Header';
 import ACLogin from './AirCanada/ACLogin';
 import ACAdmin from './AirCanada/ACAdmin';
 import ACManagerDashboard from './AirCanada/ACDashboard';
+import ACAddFlight from './AirCanada/ACAddFlight';
+import Airlines from './components/Airlines';
+
 
 
 function App() {
@@ -14,9 +17,11 @@ function App() {
       <Router>
             <Header />
             <Routes>
-              <Route exact path='/AC' element={<ACLogin/>}/>
+              <Route exact path='/' element={<Airlines/>}/>
               <Route exact path='/ACAdmin' element={<ACAdmin/>}/>
               <Route exact path='/ACManager' element={<ACManagerDashboard/>}/>
+              <Route exact path='/ACAddFlight' element={<ACAddFlight/>}/>
+              <Route exact path='/ACLogin' element={<ACLogin/>}/>
             </Routes>
           </Router>
     </ AppContextProvider >
