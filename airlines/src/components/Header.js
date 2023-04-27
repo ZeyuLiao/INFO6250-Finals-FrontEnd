@@ -1,19 +1,12 @@
-import React, { useContext } from "react";
-import { AppContext } from "../AppContext";
+import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/Neu_Logo.png";
 
 function Header() {
   console.log(sessionStorage.getItem("username"));
 
-  const { loginUsername, setLoginUsername } = useContext(AppContext);
-
   //loginUsername = sessionStorage.getItem('username');
 
-  const handleChange = (event) => {
-    sessionStorage.removeItem("username");
-    setLoginUsername("");
-  };
 
   return (
     <header className="p-1 text-bg-dark sticky-top">

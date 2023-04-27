@@ -3,7 +3,7 @@ import { Table, ButtonGroup, Button } from "react-bootstrap";
 import { apiAC, apiCA, apiDL, apiEK, apiLF } from "../axios/api";
 import { timeFormat } from "../utils/utils";
 
-function ACAddProxy() {
+function CAAddProxy() {
   const [flights, setFlights] = useState({});
 
   const doProxy = async (flight) => {
@@ -13,20 +13,19 @@ function ACAddProxy() {
       handleClick(flight.flight_number.substring(0,2));
       return;
     }
-    generatedFlighNumber = "AC" + generatedFlighNumber;
+    generatedFlighNumber = "CA" + generatedFlighNumber;
 
     let discountPrice = window.prompt('How much to reduce proxy price?', '');
 
-
     try {
-      apiAC
+      apiCA
         .post(`/outsideApi/addFlight`, {
           flight_number: generatedFlighNumber,
           departure: flight.departure,
           destination: flight.destination,
           departure_time: flight.departure_time,
           duration: flight.duration,
-          price: flight.price-discountPrice,
+          price: flight.price - discountPrice,
           proxy_flight_number: flight.flight_number,
           availableseats: 0,
           passengers: 0
@@ -49,27 +48,27 @@ function ACAddProxy() {
       let response;
       if(airline==='AC'){
          response = await apiAC.get(
-                `/outsideApi/availableToProxy?proxy_company=AC`
+                `/outsideApi/availableToProxy?proxy_company=${airline}`
               );
       }
       else if(airline==='CA'){
         response = await apiCA.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
       else if(airline==='EK'){
         response = await apiEK.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
       else if(airline==='LF'){
         response = await apiLF.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
       else if(airline==='DL'){
         response = await apiDL.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
       setFlights(response.data);
@@ -81,8 +80,8 @@ function ACAddProxy() {
   return (
     <div className="bg-light rounded shadow m-3">
       <ButtonGroup className="pb-2">
-        <Button variant="secondary" onClick={() => handleClick("CA")}>
-          Air China
+        <Button variant="secondary" onClick={() => handleClick("AC")}>
+          AirCanada
         </Button>
         <Button variant="secondary" onClick={() => handleClick("EK")}>
           Emirates
@@ -132,4 +131,4 @@ function ACAddProxy() {
   );
 }
 
-export default ACAddProxy;
+export default CAAddProxy;

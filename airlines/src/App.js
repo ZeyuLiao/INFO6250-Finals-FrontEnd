@@ -7,6 +7,10 @@ import ACAdmin from './AirCanada/ACAdmin';
 import ACManagerDashboard from './AirCanada/ACDashboard';
 import ACAddFlight from './AirCanada/ACAddFlight';
 import Airlines from './components/Airlines';
+import CAAddFlight from './AirChina/CAAddFlight';
+import CAManagerDashboard from './AirChina/CADashboard';
+import CALogin from './AirChina/CALogin';
+import CAAdmin from './AirChina/CAAdmin';
 
 
 
@@ -22,6 +26,10 @@ function App() {
               <Route exact path='/ACManager' element={<ACManagerDashboard/>}/>
               <Route exact path='/ACAddFlight' element={<ACAddFlight/>}/>
               <Route exact path='/ACLogin' element={<ACLogin/>}/>
+              <Route exact path='/CAAdmin' element={<CAAdmin/>}/>
+              <Route exact path='/CAManager' element={<CAManagerDashboard/>}/>
+              <Route exact path='/CAAddFlight' element={<CAAddFlight/>}/>
+              <Route exact path='/CALogin' element={<CALogin/>}/>
             </Routes>
           </Router>
     </ AppContextProvider >

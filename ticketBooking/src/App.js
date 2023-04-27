@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import RedirectPage from './components/Redirect';
 import Ticket from './components/Ticket';
 import OrdersTable from './components/Orders';
+import Update from './components/Update';
 
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
               <Route exact path='/buyTicket' element={<Ticket/>}/>
               <Route exact path='/redirect' element={<RedirectPage/>}/>
               <Route exact path='/orders' element={<OrdersTable/>}/>
+              <Route exact path='/update' element={<Update/>}/>
             </Routes>
           </Router>
     </ AppContextProvider >

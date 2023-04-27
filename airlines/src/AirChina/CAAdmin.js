@@ -1,39 +1,40 @@
 import React, { useState, useEffect } from "react";
 import { Table, ButtonGroup, Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
-import { apiAC } from "../axios/api";
+import { useNavigate } from 'react-router-dom';
+import { apiCA } from "../axios/api";
 import { timeFormat } from "../utils/utils";
 
-function ACProxy() {
+function CAAdmin() {
   const [flights, setFlights] = useState({});
   const navigate = useNavigate();
 
   const getFlights = async () => {
     try {
-      const response = await apiAC.get(
-        `/outsideApi/theirFlights?proxy_company=AC`
-      );
+      const response = await apiCA.get(`/outsideApi/ourFlights`);
       setFlights(response.data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const onDelete = async (proxy_flight_number) => {
-    apiAC
-      .delete(`/outsideApi/deleteProxy?proxy_flight_number=${proxy_flight_number}`)
+  const onDelete = async (flight_number) => {
+    apiCA
+      .delete(`/outsideApi/delete?flight_number=${flight_number}`)
       .then((response) => {
-        // 处理删除成功后的逻辑
-        window.alert("Delete Success");
+        window.alert("Flight deleted successfully.");
         getFlights();
       })
       .catch((error) => {
-        // 处理删除失败后的逻辑
+        window.alert(error);
       });
   };
 
   const onUpdate = async (id) => {
-    navigate(`AC/update/${id}`);
+    navigate(`/update/${id}`);
+  };
+
+  const onAdd = async () => {
+    navigate(`/CAAddFlight`);
   };
 
   useEffect(() => {
@@ -51,9 +52,10 @@ function ACProxy() {
             <th>Departure Time</th>
             <th>Duration</th>
             <th>Price</th>
-            <th>Operated By</th>
             <th>
-              Action
+              <Button variant="primary" onClick={() => onAdd()}>
+                Add
+              </Button>
             </th>
           </tr>
         </thead>
@@ -67,15 +69,20 @@ function ACProxy() {
                 <td>{timeFormat(flight.departure_time)}</td>
                 <td>{flight.duration}</td>
                 <td>{flight.price}</td>
-                <td>{flight.proxy_flight_number}</td>
                 <td>
                   <ButtonGroup>
                     <Button
                       variant="danger"
-                      onClick={() => onDelete(flight.proxy_flight_number)}
+                      onClick={() => onDelete(flight.flight_number)}
                     >
                       Delete
                     </Button>
+                    {/* <Button
+                      variant="primary"
+                      onClick={() => onUpdate(flight.flightNumber)}
+                    >
+                      Update
+                    </Button> */}
                   </ButtonGroup>
                 </td>
               </tr>
@@ -89,4 +96,4 @@ function ACProxy() {
   );
 }
 
-export default ACProxy;
+export default CAAdmin;

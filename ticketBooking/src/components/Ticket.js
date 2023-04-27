@@ -7,6 +7,11 @@ import {apiWithToken} from "../axios/api";
 function Ticket() {
   const flight = JSON.parse(sessionStorage.getItem('flight'));
   console.log(flight);
+
+  if(sessionStorage.getItem("username") === null){
+    window.location.href = "/login";
+  }
+
   const { loginUsername } = sessionStorage.getItem("username");
   const [user, setUser] = useState({});
   const navigate = useNavigate();

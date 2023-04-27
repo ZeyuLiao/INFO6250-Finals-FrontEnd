@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Table, ButtonGroup, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import { apiAC } from "../axios/api";
+import { apiCA } from "../axios/api";
 import { timeFormat } from "../utils/utils";
 
-function ACProxy() {
+function CAProxy() {
   const [flights, setFlights] = useState({});
   const navigate = useNavigate();
 
   const getFlights = async () => {
     try {
-      const response = await apiAC.get(
-        `/outsideApi/theirFlights?proxy_company=AC`
+      const response = await apiCA.get(
+        `/outsideApi/theirFlights?proxy_company=CA`
       );
       setFlights(response.data);
     } catch (error) {
@@ -20,7 +20,7 @@ function ACProxy() {
   };
 
   const onDelete = async (proxy_flight_number) => {
-    apiAC
+    apiCA
       .delete(`/outsideApi/deleteProxy?proxy_flight_number=${proxy_flight_number}`)
       .then((response) => {
         // 处理删除成功后的逻辑
@@ -32,11 +32,8 @@ function ACProxy() {
       });
   };
 
-  const onUpdate = async (id) => {
-    navigate(`AC/update/${id}`);
-  };
-
   useEffect(() => {
+    
     getFlights();
   }, []);
 
@@ -89,4 +86,4 @@ function ACProxy() {
   );
 }
 
-export default ACProxy;
+export default CAProxy;

@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Button } from "react-bootstrap";
-import { apiAC } from "../axios/api";
+import { apiCA } from "../axios/api";
 
 const validationSchema = Yup.object({
   flight_number: Yup.string()
@@ -30,7 +30,7 @@ const initialValues = {
   departure_time: null,
   duration: "",
   price: "",
-  available_seats: "",
+  avaliable_seats: "",
   passengers: "0",
 };
 
@@ -43,7 +43,7 @@ const airports = [
   { code: "BOS", name: "Boston Logan International Airport" },
 ];
 
-const ACAddFlight = () => {
+const CAAddFlight = () => {
   const navigate = useNavigate();
 
   return (
@@ -51,7 +51,7 @@ const ACAddFlight = () => {
       <div className="modal-header p-5 pb-4 border-bottom-0">
         <h1 className="text-primary fw-bold mb-0 fs-2">Add Flight</h1>
         <Link
-          to="/ACADmin"
+          to="/CAAdmin"
           type="button"
           className="btn-close"
           data-bs-dismiss="modal"
@@ -64,13 +64,13 @@ const ACAddFlight = () => {
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) => {
           setSubmitting(true);
-          values.flight_number = "AC" + values.flight_number;
-          apiAC
+          values.flight_number = "CA" + values.flight_number;
+          apiCA
             .post("/outsideApi/addFlight", values)
             .then((response) => {
               window.alert("Flight added successfully.");
               setSubmitting(false);
-              navigate(`/ACAdmin`);
+              navigate(`/CAAdmin`);
             })
             .catch((error) => {
               window.alert(error);
@@ -218,21 +218,21 @@ const ACAddFlight = () => {
             </div>
 
             <div className="mb-3 col-4">
-              <label htmlFor="available_seats" className="form-label">
-                Number of available_seats
+              <label htmlFor="avaliable_seats" className="form-label">
+                Number of avaliable_seats
               </label>
               <Field
                 type="number"
-                name="available_seats"
-                id="available_seats"
+                name="avaliable_seats"
+                id="avaliable_seats"
                 className={`form-control ${
-                  touched.available_seats && errors.available_seats
+                  touched.avaliable_seats && errors.avaliable_seats
                     ? "is-invalid"
                     : ""
                 }`}
               />
               <ErrorMessage
-                name="available_seats"
+                name="avaliable_seats"
                 component="div"
                 className="invalid-feedback"
               />
@@ -246,4 +246,4 @@ const ACAddFlight = () => {
   );
 };
 
-export default ACAddFlight;
+export default CAAddFlight;
