@@ -1,4 +1,5 @@
 import { Alert } from 'react-bootstrap';
+import moment from 'moment';
 
 function getAirlineName(code) {
   const airlines = [
@@ -28,5 +29,9 @@ function Banner({ message }) {
   );
 }
 
+function disabledDate(current) {
+  return current && current < moment().endOf('day');
+}
 
-export { getAirlineName, timeFormat, Banner };
+
+export { getAirlineName, timeFormat, Banner, disabledDate };

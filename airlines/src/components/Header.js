@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/Neu_Logo.png";
+import logo from "../assets/starAlliance.webp";
 
 function Header() {
   console.log(sessionStorage.getItem("username"));

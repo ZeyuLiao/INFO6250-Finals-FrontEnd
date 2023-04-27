@@ -7,16 +7,15 @@ function LHAddProxy() {
   const [flights, setFlights] = useState({});
 
   const doProxy = async (flight) => {
-    let generatedFlighNumber = window.prompt('Please Give A Flight Number', '');
-    if(generatedFlighNumber.length!==4){
-      alert('Invalid Flight Number');
-      handleClick(flight.flight_number.substring(0,2));
+    let generatedFlighNumber = window.prompt("Please Give A Flight Number", "");
+    if (generatedFlighNumber.length !== 4) {
+      alert("Invalid Flight Number");
+      handleClick(flight.flight_number.substring(0, 2));
       return;
     }
     generatedFlighNumber = "LH" + generatedFlighNumber;
 
-    let discountPrice = window.prompt('How much to reduce proxy price?', '');
-
+    let discountPrice = window.prompt("How much to reduce proxy price?", "");
 
     try {
       apiLH
@@ -26,15 +25,15 @@ function LHAddProxy() {
           destination: flight.destination,
           departure_time: flight.departure_time,
           duration: flight.duration,
-          price: flight.price-discountPrice,
+          price: flight.price - discountPrice,
           proxy_flight_number: flight.flight_number,
           availableseats: 0,
-          passengers: 0
+          passengers: 0,
         })
         .then((response) => {
           // 处理成功后的逻辑
-          alert('Proxy Success');
-          handleClick(flight.flight_number.substring(0,2));
+          alert("Proxy Success");
+          handleClick(flight.flight_number.substring(0, 2));
         })
         .catch((error) => {
           // 处理失败后的逻辑
@@ -47,27 +46,23 @@ function LHAddProxy() {
   const handleClick = async (airline) => {
     try {
       let response;
-      if(airline==='AC'){
-         response = await apiAC.get(
-                `/outsideApi/availableToProxy?proxy_company=LH`
-              );
-      }
-      else if(airline==='CA'){
+      if (airline === "AC") {
+        response = await apiAC.get(
+          `/outsideApi/availableToProxy?proxy_company=LH`
+        );
+      } else if (airline === "CA") {
         response = await apiCA.get(
           `/outsideApi/availableToProxy?proxy_company=LH`
         );
-      }
-      else if(airline==='EK'){
+      } else if (airline === "EK") {
         response = await apiEK.get(
           `/outsideApi/availableToProxy?proxy_company=LH`
         );
-      }
-      else if(airline==='LH'){
+      } else if (airline === "LH") {
         response = await apiLH.get(
           `/outsideApi/availableToProxy?proxy_company=LH`
         );
-      }
-      else if(airline==='DL'){
+      } else if (airline === "DL") {
         response = await apiDL.get(
           `/outsideApi/availableToProxy?proxy_company=LH`
         );
@@ -81,14 +76,14 @@ function LHAddProxy() {
   return (
     <div className="bg-light rounded shadow m-3">
       <ButtonGroup className="pb-2">
+        <Button variant="secondary" onClick={() => handleClick("AC")}>
+          Air Canada
+        </Button>
         <Button variant="secondary" onClick={() => handleClick("CA")}>
           Air China
         </Button>
         <Button variant="secondary" onClick={() => handleClick("EK")}>
           Emirates
-        </Button>
-        <Button variant="secondary" onClick={() => handleClick("LH")}>
-          Lufthansa
         </Button>
         <Button variant="secondary" onClick={() => handleClick("DL")}>
           Delta Air Lines

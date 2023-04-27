@@ -81,6 +81,9 @@ function DLAddProxy() {
   return (
     <div className="bg-light rounded shadow m-3">
       <ButtonGroup className="pb-2">
+      <Button variant="secondary" onClick={() => handleClick("AC")}>
+          Air Canada
+        </Button>
         <Button variant="secondary" onClick={() => handleClick("CA")}>
           Air China
         </Button>
@@ -89,9 +92,6 @@ function DLAddProxy() {
         </Button>
         <Button variant="secondary" onClick={() => handleClick("LH")}>
           Lufthansa
-        </Button>
-        <Button variant="secondary" onClick={() => handleClick("DL")}>
-          Delta Air Lines
         </Button>
       </ButtonGroup>
       <Table striped bordered hover>

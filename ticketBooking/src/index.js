@@ -6,6 +6,22 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import moment from 'moment';
 import 'moment-timezone';
+import axios from "axios";
+
+console.log('interceptors');
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      sessionStorage.removeItem('token');
+      window.alert('Your session has expired. Please log in again.');
+      window.location.href = '/login';
+    }
+    return Promise.reject(error);
+  }
+);
 
 moment.tz.setDefault('America/New_York');
 

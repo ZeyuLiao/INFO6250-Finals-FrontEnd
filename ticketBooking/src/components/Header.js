@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { AppContext } from '../AppContext';
 import { Link } from 'react-router-dom';
-import logo from '../assets/Neu_Logo.png';
+import logo from '../assets/expedia.png';
 
 function Header() {
 

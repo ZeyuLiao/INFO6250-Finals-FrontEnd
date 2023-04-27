@@ -23,6 +23,7 @@ import DLLogin from './Delta/DLLogin';
 import DLAdmin from './Delta/DLAdmin';
 import DLManagerDashboard from './Delta/DLDashboard';
 import DLAddFlight from './Delta/DLAddFlight';
+import Footer from './components/Footer';
 
 
 
@@ -59,6 +60,7 @@ function App() {
               <Route exact path='/DLAddFlight' element={<DLAddFlight/>}/>
               <Route exact path='/DLLogin' element={<DLLogin/>}/>
             </Routes>
+            <Footer />
           </Router>
     </ AppContextProvider >
     
