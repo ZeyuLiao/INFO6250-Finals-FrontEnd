@@ -3,7 +3,7 @@ import { Table, ButtonGroup, Button } from "react-bootstrap";
 import { apiAC, apiCA, apiDL, apiEK, apiLH } from "../axios/api";
 import { timeFormat } from "../utils/utils";
 
-function ACAddProxy() {
+function EKAddProxy() {
   const [flights, setFlights] = useState({});
 
   const doProxy = async (flight) => {
@@ -13,13 +13,13 @@ function ACAddProxy() {
       handleClick(flight.flight_number.substring(0,2));
       return;
     }
-    generatedFlighNumber = "AC" + generatedFlighNumber;
+    generatedFlighNumber = "EK" + generatedFlighNumber;
 
     let discountPrice = window.prompt('How much to reduce proxy price?', '');
 
 
     try {
-      apiAC
+      apiEK
         .post(`/outsideApi/addFlight`, {
           flight_number: generatedFlighNumber,
           departure: flight.departure,
@@ -49,27 +49,27 @@ function ACAddProxy() {
       let response;
       if(airline==='AC'){
          response = await apiAC.get(
-                `/outsideApi/availableToProxy?proxy_company=AC`
+                `/outsideApi/availableToProxy?proxy_company=EK`
               );
       }
       else if(airline==='CA'){
         response = await apiCA.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=EK`
         );
       }
       else if(airline==='EK'){
         response = await apiEK.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=EK`
         );
       }
       else if(airline==='LH'){
         response = await apiLH.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=EK`
         );
       }
       else if(airline==='DL'){
         response = await apiDL.get(
-          `/outsideApi/availableToProxy?proxy_company=AC`
+          `/outsideApi/availableToProxy?proxy_company=EK`
         );
       }
       setFlights(response.data);
@@ -132,4 +132,4 @@ function ACAddProxy() {
   );
 }
 
-export default ACAddProxy;
+export default EKAddProxy;

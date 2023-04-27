@@ -11,6 +11,18 @@ import CAAddFlight from './AirChina/CAAddFlight';
 import CAManagerDashboard from './AirChina/CADashboard';
 import CALogin from './AirChina/CALogin';
 import CAAdmin from './AirChina/CAAdmin';
+import EKAdmin from './Emirates/EKAdmin';
+import EKManagerDashboard from './Emirates/EKDashboard';
+import EKAddFlight from './Emirates/EKAddFlight';
+import EKLogin from './Emirates/EKLogin';
+import LHAdmin from './Lufthansa/LHAdmin';
+import LHManagerDashboard from './Lufthansa/LHDashboard';
+import LHAddFlight from './Lufthansa/LHAddFlight';
+import LHLogin from './Lufthansa/LHLogin';
+import DLLogin from './Delta/DLLogin';
+import DLAdmin from './Delta/DLAdmin';
+import DLManagerDashboard from './Delta/DLDashboard';
+import DLAddFlight from './Delta/DLAddFlight';
 
 
 
@@ -26,10 +38,26 @@ function App() {
               <Route exact path='/ACManager' element={<ACManagerDashboard/>}/>
               <Route exact path='/ACAddFlight' element={<ACAddFlight/>}/>
               <Route exact path='/ACLogin' element={<ACLogin/>}/>
+
               <Route exact path='/CAAdmin' element={<CAAdmin/>}/>
               <Route exact path='/CAManager' element={<CAManagerDashboard/>}/>
               <Route exact path='/CAAddFlight' element={<CAAddFlight/>}/>
               <Route exact path='/CALogin' element={<CALogin/>}/>
+
+              <Route exact path='/EKAdmin' element={<EKAdmin/>}/>
+              <Route exact path='/EKManager' element={<EKManagerDashboard/>}/>
+              <Route exact path='/EKAddFlight' element={<EKAddFlight/>}/>
+              <Route exact path='/EKLogin' element={<EKLogin/>}/>
+
+              <Route exact path='/LHAdmin' element={<LHAdmin/>}/>
+              <Route exact path='/LHManager' element={<LHManagerDashboard/>}/>
+              <Route exact path='/LHAddFlight' element={<LHAddFlight/>}/>
+              <Route exact path='/LHLogin' element={<LHLogin/>}/>
+
+              <Route exact path='/DLAdmin' element={<DLAdmin/>}/>
+              <Route exact path='/DLManager' element={<DLManagerDashboard/>}/>
+              <Route exact path='/DLAddFlight' element={<DLAddFlight/>}/>
+              <Route exact path='/DLLogin' element={<DLLogin/>}/>
             </Routes>
           </Router>
     </ AppContextProvider >

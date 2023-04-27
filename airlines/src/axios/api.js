@@ -19,7 +19,7 @@ const apiCA = axios.create({
 const apiEK = axios.create({
   baseURL: 'http://localhost:8093',
 });
-const apiLF = axios.create({
+const apiLH = axios.create({
   baseURL: 'http://localhost:8094',
 });
 const apiDL = axios.create({
@@ -41,4 +41,4 @@ apiWithToken.interceptors.request.use(
 );
 
 
-export {api, apiWithToken, apiAC, apiCA,apiEK,apiLF,apiDL};
+export {api, apiWithToken, apiAC, apiCA,apiEK,apiLH,apiDL};

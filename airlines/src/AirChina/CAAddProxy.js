@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Table, ButtonGroup, Button } from "react-bootstrap";
-import { apiAC, apiCA, apiDL, apiEK, apiLF } from "../axios/api";
+import { apiAC, apiCA, apiDL, apiEK, apiLH } from "../axios/api";
 import { timeFormat } from "../utils/utils";
 
 function CAAddProxy() {
@@ -61,8 +61,8 @@ function CAAddProxy() {
           `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
-      else if(airline==='LF'){
-        response = await apiLF.get(
+      else if(airline==='LH'){
+        response = await apiLH.get(
           `/outsideApi/availableToProxy?proxy_company=${airline}`
         );
       }
@@ -86,7 +86,7 @@ function CAAddProxy() {
         <Button variant="secondary" onClick={() => handleClick("EK")}>
           Emirates
         </Button>
-        <Button variant="secondary" onClick={() => handleClick("LF")}>
+        <Button variant="secondary" onClick={() => handleClick("LH")}>
           Lufthansa
         </Button>
         <Button variant="secondary" onClick={() => handleClick("DL")}>

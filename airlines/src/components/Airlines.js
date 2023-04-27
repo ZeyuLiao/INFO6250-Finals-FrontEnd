@@ -6,9 +6,9 @@ const Airlines = () => {
 
   return (
     <div className="p-5 m-5 rounded shadow">
-      <h1>Login</h1>
+      <h1>Choose your airline</h1>
       <div className="mt-5 container row">
-        <div className="col-3">
+        <div className="col-2">
           <button
             className=" btn btn-primary "
             onClick={() => navigate("/ACLogin")}
@@ -16,12 +16,36 @@ const Airlines = () => {
             Air Canada
           </button>
         </div>
-        <div className="col-3">
+        <div className="col-2">
           <button
             className=" btn btn-primary"
             onClick={() => navigate("/CALogin")}
           >
             Air China
+          </button>
+        </div>
+        <div className="col-2">
+          <button
+            className=" btn btn-primary "
+            onClick={() => navigate("/EKLogin")}
+          >
+            Emirates
+          </button>
+        </div>
+        <div className="col-2">
+          <button
+            className=" btn btn-primary "
+            onClick={() => navigate("/LHLogin")}
+          >
+            Lufthansa
+          </button>
+        </div>
+        <div className="col-2">
+          <button
+            className=" btn btn-primary "
+            onClick={() => navigate("/DLLogin")}
+          >
+            Delta Airlines
           </button>
         </div>
       </div>
